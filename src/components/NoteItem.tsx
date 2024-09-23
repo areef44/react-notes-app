@@ -7,11 +7,12 @@ import ArchiveButton from "./ArchivedButton";
 interface NoteItemProps {
     note: Note;
     onDelete: (id: number) => void;
+    onArchive?: (id: number) => void;
 }
 
 class NoteItem extends React.Component<NoteItemProps> {
     render() {
-        const { note, onDelete } = this.props;
+        const { note, onDelete, onArchive } = this.props;
 
         return (
             <div className="note-item">
@@ -24,7 +25,11 @@ class NoteItem extends React.Component<NoteItemProps> {
                 />
                 <div className="note-item__action">
                     <DeleteButton id={note.id} onDelete={onDelete} />
-                    <ArchiveButton id={note.id} onDelete={onDelete} />
+                    {
+                        onArchive && (
+                            <ArchiveButton id={note.id} onArchive={onArchive}/>
+                        )
+                    }
                 </div>
                     
             </div>

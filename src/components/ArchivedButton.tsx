@@ -2,18 +2,18 @@ import React from "react";
 
 interface ArchiveButtonProps {
   id: number;
-  onDelete: (id: number) => void;
+  onArchive: (id: number) => void;
 }
 
 class ArchiveButton extends React.Component<ArchiveButtonProps> {
-  handleDelete = () => {
-    const { id, onDelete } = this.props;
-    onDelete(id);
+  handleArchive = () => {
+    const { id, onArchive } = this.props;
+    onArchive(id);
   };
 
   render() {
     return (
-      <button className="note-item__archive-button" onClick={this.handleDelete}>
+      <button className="note-item__archive-button" onClick={this.handleArchive}>
         Arsipkan
       </button>
     );
