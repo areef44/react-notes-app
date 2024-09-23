@@ -5,11 +5,12 @@ import Note from "../interface/noteIface";
 
 interface NotesListProps {
     notes: Note[];
+    onDelete: (id: number) => void;
 }
 
 class NoteList extends React.Component<NotesListProps>{
     render() {
-        const { notes } = this.props
+        const { notes,onDelete } = this.props
 
         return (
             <div className="notes-list">
@@ -18,7 +19,9 @@ class NoteList extends React.Component<NotesListProps>{
                     <NoteItem
                         key={note.id}
                         note={note}
+                        onDelete={onDelete}
                     />
+
                 ))
                 }
 

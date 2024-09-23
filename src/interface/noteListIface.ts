@@ -1,7 +1,8 @@
 interface NoteList {
+    id: number;
     title: string;
     body: string;
-    createdAt: string; // Bisa menggunakan Date jika ingin menyimpan sebagai objek Date
+    createdAt: string;
     archived: boolean;
 }
 

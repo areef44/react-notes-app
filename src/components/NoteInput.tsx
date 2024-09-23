@@ -13,7 +13,7 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
         this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this)
         this.onBodyChangeEventHandler = this.onBodyChangeEventHandler.bind(this)
         this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this)
-        this.onClearEventHandler = this.onClearEventHandler.bind(this)
+        this.onClearHandler = this.onClearHandler.bind(this)
     }
 
     onTitleChangeEventHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -27,13 +27,14 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
     onSubmitEventHandler(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         this.props.addNotes(this.state);
-        
+        this.onClearHandler();
     }
 
-    onClearEventHandler(event: React.MouseEvent<HTMLButtonElement>) {
-        event.preventDefault();
-        this.setState({ title: '', body: '' });
-        this.props.clearNotes();
+    onClearHandler() {
+        this.setState({
+            title: "",
+            body: "",
+        });
     }
 
     render() {
@@ -55,8 +56,9 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
                 <div className="button-group">
                     <button 
                         className="button-clear"
-                        type="button" 
-                        onClick={this.onClearEventHandler}>
+                        type="button"
+                        onClick={this.onClearHandler}
+                        >
                         Clear
                     </button>
                     <button 
