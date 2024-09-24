@@ -19,6 +19,17 @@
     border: 1px solid #aaa;
     border-radius: 4px;
   }
+
+  .input-search {
+    width: 300px;
+    padding: 12px;
+    margin: 8px 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: whitesmoke;
+    color: black;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+  }
   
   input::placeholder, textarea::placeholder {
     color: #aaa;
@@ -30,8 +41,8 @@
     align-items: center;
     justify-content: center;
     padding: 4px 16px;
-    border-bottom: 1px solid red;
-    background-color: red;
+    border-bottom: 1px solid #ff5f52;
+    background-color: #ff5f52;
   }
   
   .note-app__header h1 {

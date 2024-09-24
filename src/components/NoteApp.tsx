@@ -8,6 +8,7 @@ import NoteHeader from "./NoteHeader";
 
 interface NoteAppState {
     notes: Note[];
+    searchQuery: string;
 }
 
 class NoteApp extends React.Component<{}, NoteAppState> {
@@ -15,12 +16,14 @@ class NoteApp extends React.Component<{}, NoteAppState> {
         super(props);
         this.state = {
             notes: getInitialData(),
+            searchQuery: "",
         }
 
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
         this.onArchiveHandler = this.onArchiveHandler.bind(this);
         this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     onDeleteHandler(id: number) {
@@ -65,24 +68,34 @@ class NoteApp extends React.Component<{}, NoteAppState> {
         this.setState({ notes });
     }
 
+    handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ searchQuery: event.target.value });
+    }
+
 
     render() {
+        const { searchQuery, notes } = this.state;
+
+        const filteredNotes = notes.filter(note =>
+            note.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
         return (
             <div>
-                <NoteHeader />
+                <NoteHeader onSearchChange={this.handleSearchChange} searchQuery={searchQuery}/>
                 <NoteInput addNotes={this.onAddNoteHandler} />
                 <div className="note-app__body">
                     <h2>Catatan Aktif</h2>
-                        {this.state.notes.filter(note => !note.archived).length === 0 ? (
+                        {filteredNotes.filter(note => !note.archived).length === 0 ? (
                             <p className="notes-list__empty-message">Tidak Ada Catatan</p>
                         ) : (
-                            <NoteList notes={this.state.notes.filter(note => !note.archived)} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler}/>
+                            <NoteList notes={filteredNotes.filter(note => !note.archived)} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler}/>
                         )}
                     <h2>Arsip Catatan</h2>
-                        {this.state.notes.filter(note => note.archived).length === 0 ? (
+                        {filteredNotes.filter(note => note.archived).length === 0 ? (
                             <p className="notes-list__empty-message">Tidak Ada Catatan</p>
                         ) : (
-                            <NoteList notes={this.state.notes.filter(note => note.archived)} onDelete={this.onDeleteHandler} onUnarchive={this.onUnarchiveHandler}/>
+                            <NoteList notes={filteredNotes.filter(note => note.archived)} onDelete={this.onDeleteHandler} onUnarchive={this.onUnarchiveHandler}/>
                         )}
                 </div>
                 
