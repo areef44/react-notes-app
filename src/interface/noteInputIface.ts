@@ -5,7 +5,7 @@ interface NotesInputState {
 }
 
 interface NotesInputProps {
-    addNotes: (note: { title: string; body: string }) => void; 
+    addNotes: (note: { title: string; body: string; }) => void; 
 }
 
 export type { NotesInputState, NotesInputProps };

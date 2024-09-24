@@ -3,7 +3,6 @@ import NoteList from "./NoteList";
 import { getInitialData } from "../utils";
 import Note from "../interface/noteIface";
 import NoteInput from "./NoteInput";
-import { NotesInputState } from "../interface/noteInputIface";
 
 
 interface NoteAppState {
@@ -28,15 +27,15 @@ class NoteApp extends React.Component<{}, NoteAppState> {
         this.setState({ notes })
     }
 
-    onAddNoteHandler({ title, body} : NotesInputState) {
+    onAddNoteHandler(note: { title: string, body: string }) {
         this.setState((prevState : any) => {
             return {
                 notes: [
                     ...prevState.notes,
                 {
                     id: +new Date(),
-                    title,
-                    body,
+                    title: note.title,
+                    body: note.body,
                     createdAt: +new Date(),
                     archived: false
                 }
@@ -69,6 +68,7 @@ class NoteApp extends React.Component<{}, NoteAppState> {
     render() {
         return (
             <div className="note-app__body">
+                
                 <NoteInput addNotes={this.onAddNoteHandler} />
                 <h2>Catatan Aktif</h2>
                     {this.state.notes.filter(note => !note.archived).length === 0 ? (

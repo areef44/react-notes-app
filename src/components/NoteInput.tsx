@@ -32,7 +32,8 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
 
     onSubmitEventHandler(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        this.props.addNotes(this.state);
+        const { title, body } = this.state;
+        this.props.addNotes({ title, body });
         this.onClearHandler();
     }
 
@@ -51,7 +52,7 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
             <div>
             <h2>Buat Catatan</h2>
             <form className="note-input" onSubmit={this.onSubmitEventHandler}>
-                <p className="note-input__title__char-limit">Jumlah karakter: {this.state.titleCharCount}</p>
+                <p className="note-input__title__char-limit">Jumlah karakter Title: {this.state.titleCharCount}</p>
                 <input 
                     type="text" 
                     placeholder="Masukkan judul disini..." 
