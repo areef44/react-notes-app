@@ -7,11 +7,12 @@ interface NotesListProps {
     notes: Note[];
     onDelete: (id: number) => void;
     onArchive?: (id: number) => void;
+    onUnarchive?: (id: number) => void;
 }
 
 class NoteList extends React.Component<NotesListProps>{
     render() {
-        const { notes,onDelete,onArchive } = this.props
+        const { notes, onDelete, onArchive, onUnarchive } = this.props
 
         return (
             <div className="notes-list">
@@ -22,6 +23,7 @@ class NoteList extends React.Component<NotesListProps>{
                         note={note}
                         onDelete={onDelete}
                         onArchive={onArchive}
+                        onUnarchive={onUnarchive}
                     />
                 ))
                 }
