@@ -3,6 +3,7 @@ import NoteList from "./NoteList";
 import { getInitialData } from "../utils";
 import Note from "../interface/noteIface";
 import NoteInput from "./NoteInput";
+import NoteHeader from "./NoteHeader";
 
 
 interface NoteAppState {
@@ -67,21 +68,24 @@ class NoteApp extends React.Component<{}, NoteAppState> {
 
     render() {
         return (
-            <div className="note-app__body">
-                
+            <div>
+                <NoteHeader />
                 <NoteInput addNotes={this.onAddNoteHandler} />
-                <h2>Catatan Aktif</h2>
-                    {this.state.notes.filter(note => !note.archived).length === 0 ? (
-                        <p className="notes-list__empty-message">Tidak Ada Catatan</p>
-                    ) : (
-                        <NoteList notes={this.state.notes.filter(note => !note.archived)} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler}/>
-                    )}
-                <h2>Arsip Catatan</h2>
-                {this.state.notes.filter(note => note.archived).length === 0 ? (
-                        <p className="notes-list__empty-message">Tidak Ada Catatan</p>
-                    ) : (
-                        <NoteList notes={this.state.notes.filter(note => note.archived)} onDelete={this.onDeleteHandler} onUnarchive={this.onUnarchiveHandler}/>
-                    )}
+                <div className="note-app__body">
+                    <h2>Catatan Aktif</h2>
+                        {this.state.notes.filter(note => !note.archived).length === 0 ? (
+                            <p className="notes-list__empty-message">Tidak Ada Catatan</p>
+                        ) : (
+                            <NoteList notes={this.state.notes.filter(note => !note.archived)} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler}/>
+                        )}
+                    <h2>Arsip Catatan</h2>
+                        {this.state.notes.filter(note => note.archived).length === 0 ? (
+                            <p className="notes-list__empty-message">Tidak Ada Catatan</p>
+                        ) : (
+                            <NoteList notes={this.state.notes.filter(note => note.archived)} onDelete={this.onDeleteHandler} onUnarchive={this.onUnarchiveHandler}/>
+                        )}
+                </div>
+                
             </div>
         )
     }

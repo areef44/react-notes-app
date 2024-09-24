@@ -15,19 +15,21 @@ class NoteList extends React.Component<NotesListProps>{
         const { notes, onDelete, onArchive, onUnarchive } = this.props
 
         return (
-            <div className="notes-list">
-                {
-                notes.map((note) => (
-                    <NoteItem
-                        key={note.id}
-                        note={note}
-                        onDelete={onDelete}
-                        onArchive={onArchive}
-                        onUnarchive={onUnarchive}
-                    />
-                ))
-                }
+            <div className="note-app__body">
+                <div className="notes-list">
+                    {
+                    notes.map((note) => (
+                        <NoteItem
+                            key={note.id}
+                            note={note}
+                            onDelete={onDelete}
+                            onArchive={onArchive}
+                            onUnarchive={onUnarchive}
+                        />
+                    ))
+                    }
 
+                </div>
             </div>
         )
     }

@@ -49,7 +49,7 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
         const isSubmitDisabled = this.state.title === '' || this.state.body === '';
 
         return (
-            <div>
+            <div className="note-app__body">
             <h2>Buat Catatan</h2>
             <form className="note-input" onSubmit={this.onSubmitEventHandler}>
                 <p className="note-input__title__char-limit">Jumlah karakter Title: {this.state.titleCharCount}</p>

@@ -30,7 +30,8 @@
     align-items: center;
     justify-content: center;
     padding: 4px 16px;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid red;
+    background-color: red;
   }
   
   .note-app__header h1 {
@@ -39,17 +40,14 @@
     color: white;
   }
   
-  
   .note-app__body {
     max-width: 1000px;
     margin: 16px auto;
-    padding: 12px;
   }
   
   .note-app__body h2 {
     font-weight: 600;
-    margin: 16px 0;
-
+    margin-bottom: 16px;
   }
   
   .note-input {
@@ -153,6 +151,7 @@
   .notes-list__empty-message {
     text-align: center;
     color: #aaa;
+    padding: 16px;
   }
   
   .note-item {
