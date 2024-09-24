@@ -1,6 +1,7 @@
 import React from "react";
 import { NotesInputProps, NotesInputState } from "../interface/noteInputIface";
 
+
 class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
     constructor (props: NotesInputProps) {
         super(props);
@@ -8,6 +9,7 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
         this.state = {
             title: '',
             body: '',
+            titleCharCount: 0,
         };
         // binding method
         this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this)
@@ -17,7 +19,11 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
     }
 
     onTitleChangeEventHandler(event: React.ChangeEvent<HTMLInputElement>) {
-            this.setState({ title: event.target.value });
+            const title = event.target.value;
+            if(title.length <= 50) {
+                const titleCharCount = title.length 
+                this.setState({ title, titleCharCount });
+            }
     }
 
     onBodyChangeEventHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -34,14 +40,18 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
         this.setState({
             title: "",
             body: "",
+            titleCharCount: 0,
         });
     }
 
     render() {
+        const isSubmitDisabled = this.state.title === '' || this.state.body === '';
+
         return (
             <div>
             <h2>Buat Catatan</h2>
             <form className="note-input" onSubmit={this.onSubmitEventHandler}>
+                <p className="note-input__title__char-limit">Jumlah karakter: {this.state.titleCharCount}</p>
                 <input 
                     type="text" 
                     placeholder="Masukkan judul disini..." 
@@ -62,7 +72,10 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
                         Clear
                     </button>
                     <button 
-                        type="submit">
+                        className={isSubmitDisabled ? "button-disabled" : "button-submit"}
+                        type="submit"
+                        disabled={isSubmitDisabled}
+                        >
                         Buat
                     </button>
                 </div>

@@ -1,6 +1,7 @@
 interface NotesInputState {
     title: string;
     body: string;
+    titleCharCount: number;
 }
 
 interface NotesInputProps {

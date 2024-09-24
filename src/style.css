@@ -93,7 +93,7 @@
     gap: 10px; /* Jarak antar tombol */
   }
   
-  .note-input .button-group button  {
+  .note-input .button-group .button-submit {
     display: block;
     width: 100%;
     padding: 8px;
@@ -107,10 +107,18 @@
     margin-top: 8px;
   }
 
-  .note-input .button-group button:hover {
-    background-color: white; /* Warna biru lebih gelap saat hover */
-    border-color: lightgray; /* Sinkron dengan background */
-    color: black;
+  .note-input .button-group .button-disabled {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: grey;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    border: 1px solid grey;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: not-allowed;
+    margin-top: 8px;
   }
 
   .note-input .button-group .button-clear:hover {
@@ -181,7 +189,7 @@
     display: flex;
   }
   
-  .note-item__delete-button,.note-item__archive-button {
+  .note-item__delete-button,.note-item__archive-button,.note-item__unarchive-button {
     display: block;
     width: 100%;
     border: 0;
@@ -202,15 +210,38 @@
     background-color: #198754;
 
   }
+
+  .note-item__unarchive-button {
+    color: white;
+    background-color: #ffcc00;
+
+  }
   
   .note-item__archive-button:hover {
     background-color: white;
     color: #198754;
   }
+
+  .note-item__unarchive-button:hover {
+    background-color: white;
+    color: #ffcc00;
+  }
   
   .note-item__delete-button:hover {
     background-color: white;
     color: #ff5f52;
+  }
+
+  button[disabled] {
+    background-color: #ccc; 
+    cursor: not-allowed;    
+    opacity: 0.6;
+  }
+
+  button[disabled]:hover {
+    background-color: #ccc; /* Same color as the disabled state */
+    border: 1px solid #ccc; /* Match the border color */
+    color: #999; /* Optional: Change text color if needed */
   }
   
   @media only screen and (min-width: 500px) {

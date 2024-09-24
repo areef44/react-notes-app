@@ -13,7 +13,7 @@ interface UnarchiveButtonProps {
   
     render() {
       return (
-        <button className="note-item__archive-button" onClick={this.handleUnarchive}>
+        <button className="note-item__unarchive-button" onClick={this.handleUnarchive}>
           Pindahkan
         </button>
       );
