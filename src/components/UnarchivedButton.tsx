@@ -5,19 +5,15 @@ interface UnarchiveButtonProps {
     onUnarchive: (id: number) => void;
   }
   
-  class UnarchiveButton extends React.Component<UnarchiveButtonProps> {
-    handleUnarchive = () => {
-      const { id, onUnarchive } = this.props;
+  const UnarchiveButton : React.FC<UnarchiveButtonProps> = ({ id, onUnarchive }) => {
+    const handleUnarchive = () => {
       onUnarchive(id);
     };
-  
-    render() {
       return (
-        <button className="note-item__unarchive-button" onClick={this.handleUnarchive}>
+        <button className="note-item__unarchive-button" onClick={handleUnarchive}>
           Pindahkan
         </button>
       );
-    }
   }
 
 export default UnarchiveButton;

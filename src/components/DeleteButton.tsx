@@ -5,19 +5,17 @@ interface DeleteButtonProps {
   onDelete: (id: number) => void;
 }
 
-class DeleteButton extends React.Component<DeleteButtonProps> {
-  handleDelete = () => {
-    const { id, onDelete } = this.props;
+const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onDelete }) => {
+  const handleDelete = () => {
     onDelete(id);
   };
 
-  render() {
     return (
-      <button className="note-item__delete-button" onClick={this.handleDelete}>
+      <button className="note-item__delete-button" onClick={handleDelete}>
         Hapus
       </button>
     );
-  }
+
 }
 
 export default DeleteButton;

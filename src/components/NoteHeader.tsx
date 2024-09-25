@@ -6,18 +6,16 @@ interface NoteHeaderProps {
     searchQuery: string;
 }
 
-class NoteHeader extends React.Component<NoteHeaderProps> {
-    render() {
-        return (
-            <div className="note-app__header">
-                <h1>Notes</h1>
-                <SearchButton 
-                    onSearchChange={this.props.onSearchChange}
-                    searchQuery={this.props.searchQuery}
-                />
-            </div>
-        )
-    }
-}
+const NoteHeader: React.FC<NoteHeaderProps> = ({ onSearchChange, searchQuery }) => {
+    return (
+        <div className="note-app__header">
+            <h1>Notes</h1>
+            <SearchButton 
+                onSearchChange={onSearchChange}
+                searchQuery={searchQuery}
+            />
+        </div>
+    );
+};
 
 export default NoteHeader;

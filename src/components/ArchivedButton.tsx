@@ -5,19 +5,16 @@ interface ArchiveButtonProps {
   onArchive: (id: number) => void;
 }
 
-class ArchiveButton extends React.Component<ArchiveButtonProps> {
-  handleArchive = () => {
-    const { id, onArchive } = this.props;
+const ArchiveButton: React.FC<ArchiveButtonProps> = ({ id, onArchive }) => {
+  const handleArchive = () => {
     onArchive(id);
   };
 
-  render() {
-    return (
-      <button className="note-item__archive-button" onClick={this.handleArchive}>
-        Arsipkan
-      </button>
-    );
-  }
-}
+  return (
+    <button className="note-item__archive-button" onClick={handleArchive}>
+      Arsipkan
+    </button>
+  );
+};
 
 export default ArchiveButton;

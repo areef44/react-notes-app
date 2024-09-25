@@ -12,10 +12,7 @@ interface NoteItemProps {
     onUnarchive?: (id: number) => void;
 }
 
-class NoteItem extends React.Component<NoteItemProps> {
-    render() {
-        const { note, onDelete, onArchive, onUnarchive } = this.props;
-
+const NoteItem: React.FC<NoteItemProps> = ({ note, onDelete, onArchive, onUnarchive }) => {
         return (
             <div className="note-item">
                 <NoteItemContent 
@@ -36,7 +33,6 @@ class NoteItem extends React.Component<NoteItemProps> {
                     
             </div>
         )
-    }
 }
 
 export default NoteItem;

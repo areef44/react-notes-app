@@ -10,10 +10,7 @@ interface NotesListProps {
     onUnarchive?: (id: number) => void;
 }
 
-class NoteList extends React.Component<NotesListProps>{
-    render() {
-        const { notes, onDelete, onArchive, onUnarchive } = this.props
-
+const NoteList : React.FC<NotesListProps> = ({ notes,onDelete, onArchive, onUnarchive}) => {
         return (
             <div className="note-app__body">
                 <div className="notes-list">
@@ -32,7 +29,6 @@ class NoteList extends React.Component<NotesListProps>{
                 </div>
             </div>
         )
-    }
 } 
 
 export default NoteList;

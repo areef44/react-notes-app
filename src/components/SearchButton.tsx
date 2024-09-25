@@ -5,20 +5,18 @@ interface SearchButtonProps {
     searchQuery: string;
 }
 
-class SearchButton extends React.Component<SearchButtonProps> {
-    render() {
+const SearchButton: React.FC<SearchButtonProps> = ({ onSearchChange, searchQuery }) => {
         return (
             <div>
                 <input 
                     className="input-search"
                     type="text" 
                     placeholder="Cari Catatan..." 
-                    value={this.props.searchQuery}
-                    onChange={this.props.onSearchChange}
+                    value={searchQuery}
+                    onChange={onSearchChange}
                 />
             </div>
         )
-    }
 }
 
 export default SearchButton;

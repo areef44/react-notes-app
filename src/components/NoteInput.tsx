@@ -1,5 +1,6 @@
 import React from "react";
 import { NotesInputProps, NotesInputState } from "../interface/noteInputIface";
+import autoBind from "auto-bind";
 
 
 class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
@@ -12,10 +13,7 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
             titleCharCount: 0,
         };
         // binding method
-        this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this)
-        this.onBodyChangeEventHandler = this.onBodyChangeEventHandler.bind(this)
-        this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this)
-        this.onClearHandler = this.onClearHandler.bind(this)
+       autoBind(this)
     }
 
     onTitleChangeEventHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -52,7 +50,7 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
             <div className="note-app__body">
             <h2>Buat Catatan</h2>
             <form className="note-input" onSubmit={this.onSubmitEventHandler}>
-                <p className="note-input__title__char-limit">Jumlah karakter Title: {this.state.titleCharCount}</p>
+                <p className="note-input__title__char-limit">Sisa Karakter: {50 - this.state.titleCharCount}</p>
                 <input 
                     type="text" 
                     placeholder="Masukkan judul disini..." 

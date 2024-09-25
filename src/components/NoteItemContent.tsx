@@ -4,10 +4,7 @@ import { showFormattedDate } from "../utils";
 
 interface NoteItemContentProps extends Note {}
 
-class NoteItemContent extends React.Component<NoteItemContentProps> {
-    render() {
-        const { title, body, createdAt } = this.props;
-
+const NoteItemContent: React.FC<NoteItemContentProps> = ({ title, createdAt, body }) => {
         return (
             <div className="note-item__content">
                 <h3 className="note-item__title">{title}</h3>
@@ -15,7 +12,7 @@ class NoteItemContent extends React.Component<NoteItemContentProps> {
                 <p className="note-item__body">{body}</p>
             </div>
         )
-    }
+
 }
 
 export default NoteItemContent;
