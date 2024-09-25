@@ -4,6 +4,7 @@ import { getInitialData } from "../utils";
 import Note from "../interface/noteIface";
 import NoteInput from "./NoteInput";
 import NoteHeader from "./NoteHeader";
+import autoBind from "auto-bind";
 
 
 interface NoteAppState {
@@ -19,11 +20,7 @@ class NoteApp extends React.Component<{}, NoteAppState> {
             searchQuery: "",
         }
 
-        this.onDeleteHandler = this.onDeleteHandler.bind(this);
-        this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
-        this.onArchiveHandler = this.onArchiveHandler.bind(this);
-        this.onUnarchiveHandler = this.onUnarchiveHandler.bind(this);
-        this.handleSearchChange = this.handleSearchChange.bind(this);
+        autoBind(this)
     }
 
     onDeleteHandler(id: number) {
