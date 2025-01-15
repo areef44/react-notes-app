@@ -1,19 +1,14 @@
 import React from "react";
-import SearchButton from "./SearchButton";
+import Navigation from "./Navigation";
 
 interface NoteHeaderProps {
-    onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    searchQuery: string;
 }
 
-const NoteHeader: React.FC<NoteHeaderProps> = ({ onSearchChange, searchQuery }) => {
+const NoteHeader: React.FC<NoteHeaderProps> = () => {
     return (
         <div className="note-app__header">
             <h1>Notes</h1>
-            <SearchButton 
-                onSearchChange={onSearchChange}
-                searchQuery={searchQuery}
-            />
+            <Navigation />
         </div>
     );
 };

@@ -31,7 +31,7 @@ class NoteInput extends React.Component<NotesInputProps,NotesInputState> {
     onSubmitEventHandler(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const { title, body } = this.state;
-        this.props.addNotes({ title, body });
+        this.props.addNote({ title, body });
         this.onClearHandler();
     }
 

@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import NoteApp from './components/NoteApp';
+import { BrowserRouter } from 'react-router-dom';
 
 import './styles/style.css';
 
@@ -7,4 +8,8 @@ import './styles/style.css';
 const root = createRoot(document.getElementById('root'));
 
 // Render elemen React ke dalam root
-root.render(<NoteApp />);
+root.render(
+    <BrowserRouter>
+        <NoteApp />
+    </BrowserRouter>
+);

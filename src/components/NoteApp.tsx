@@ -1,10 +1,12 @@
 import React from "react";
-import NoteList from "./NoteList";
-import { getInitialData } from "../utils";
+import { getNotes } from "../utils";
 import Note from "../interface/noteIface";
-import NoteInput from "./NoteInput";
 import NoteHeader from "./NoteHeader";
 import autoBind from "auto-bind";
+import HomePage from "../pages/HomePage";
+import AddPage from "../pages/AddPage";
+import { Route, Routes } from 'react-router-dom'
+import ArchivePage from "../pages/ArchivePage";
 
 
 interface NoteAppState {
@@ -16,33 +18,11 @@ class NoteApp extends React.Component<{}, NoteAppState> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            notes: getInitialData(),
+            notes: getNotes(),
             searchQuery: "",
         }
 
         autoBind(this)
-    }
-
-    onDeleteHandler(id: number) {
-        const notes = this.state.notes.filter(note => note.id !== id)
-        this.setState({ notes })
-    }
-
-    onAddNoteHandler(note: { title: string, body: string }) {
-        this.setState((prevState : any) => {
-            return {
-                notes: [
-                    ...prevState.notes,
-                {
-                    id: +new Date(),
-                    title: note.title,
-                    body: note.body,
-                    createdAt: +new Date(),
-                    archived: false
-                }
-                ]
-            }
-        })
     }
 
     onArchiveHandler(id: number) {
@@ -65,22 +45,19 @@ class NoteApp extends React.Component<{}, NoteAppState> {
         this.setState({ notes });
     }
 
-    handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ searchQuery: event.target.value });
-    }
-
 
     render() {
-        const { searchQuery, notes } = this.state;
-
-        const filteredNotes = notes.filter(note =>
-            note.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-
         return (
             <div>
-                <NoteHeader onSearchChange={this.handleSearchChange} searchQuery={searchQuery}/>
-                <NoteInput addNotes={this.onAddNoteHandler} />
+                <NoteHeader />
+                <main>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/archive" element={<ArchivePage />}/>
+                    <Route path="/add" element={<AddPage />} />
+                </Routes>
+                </main>
+                {/* <NoteInput addNote={this.onAddNoteHandler} />
                 <div className="note-app__body">
                     <h2>Catatan Aktif</h2>
                         {filteredNotes.filter(note => !note.archived).length === 0 ? (
@@ -94,7 +71,7 @@ class NoteApp extends React.Component<{}, NoteAppState> {
                         ) : (
                             <NoteList notes={filteredNotes.filter(note => note.archived)} onDelete={this.onDeleteHandler} onUnarchive={this.onUnarchiveHandler}/>
                         )}
-                </div>
+                </div> */}
                 
             </div>
         )
