@@ -1,4 +1,5 @@
 import React from "react";
+import { FaRegCircleUp } from "react-icons/fa6";
 
 interface UnarchiveButtonProps {
     id: number;
@@ -11,7 +12,7 @@ interface UnarchiveButtonProps {
     };
       return (
         <button className="note-item__unarchive-button" onClick={handleUnarchive}>
-          Pindahkan
+          <FaRegCircleUp />
         </button>
       );
   }

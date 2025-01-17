@@ -2,6 +2,7 @@ import React from "react";
 import NoteHeader from "./NoteHeader";
 import HomePage from "../pages/HomePage";
 import AddPage from "../pages/AddPage";
+import DetailPage from "../pages/DetailPage"
 import { Route, Routes } from "react-router-dom";
 import ArchivePage from "../pages/ArchivePage";
 
@@ -16,6 +17,7 @@ const NoteApp: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/archive" element={<ArchivePage />} />
           <Route path="/add" element={<AddPage />} />
+          <Route path="/notes/:id" element={<DetailPage />} />
         </Routes>
       </main>
     </div>

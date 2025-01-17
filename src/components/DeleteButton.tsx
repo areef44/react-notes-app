@@ -1,4 +1,5 @@
 import React from "react";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 interface DeleteButtonProps {
   id: number;
@@ -12,7 +13,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onDelete }) => {
 
     return (
       <button className="note-item__delete-button" onClick={handleDelete}>
-        Hapus
+        <FaRegTrashCan />
       </button>
     );
 

@@ -98,6 +98,20 @@ function unArchivedNote(id: number): void {
   });
 }
 
+function getNote(id : number) {
+  if (!id) {
+    return null;
+  }
+
+  const filteredNotes = notes.filter((note) => note.id === id);
+
+  if (!filteredNotes.length) {
+    return null;
+  }
+
+  return filteredNotes[0];
+}
 
 
-export { notes, showFormattedDate, getNotes, addNote, deleteNote, archivedNote, unArchivedNote };
+
+export { notes, showFormattedDate, getNotes, addNote, deleteNote, archivedNote, unArchivedNote, getNote };

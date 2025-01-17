@@ -183,6 +183,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background-color: lightgray;
   }
   
   .note-item__content {
@@ -209,49 +210,53 @@
   
   .note-item__action {
     display: flex;
+    justify-content: end;
+    gap: 0.5rem;
   }
   
   .note-item__delete-button,.note-item__archive-button,.note-item__unarchive-button {
-    display: block;
-    width: 100%;
-    border: 0;
-    border-top: 1px solid #aaa;
-    padding: 8px 0;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    cursor: pointer;
+    font-size: 3rem;
+    padding: 1rem;
+    border-radius: 50%;
   }
   
   .note-item__delete-button {
-    color: white;
-    background-color: #ff5f52;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border-radius: 10%;
   }
   
   .note-item__archive-button {
-    color: white;
-    background-color: #198754;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border-radius: 10%;
   }
 
   .note-item__unarchive-button {
-    color: white;
-    background-color: #ffcc00;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border-radius: 10%;
   }
   
   .note-item__archive-button:hover {
     background-color: white;
-    color: #198754;
+    color: #ffcc00;
   }
 
   .note-item__unarchive-button:hover {
     background-color: white;
-    color: #ffcc00;
+    color: #198754;
   }
   
   .note-item__delete-button:hover {
     background-color: white;
-    color: #ff5f52;
+    color: red;
   }
 
   button[disabled] {
@@ -264,6 +269,27 @@
     background-color: #ccc; /* Same color as the disabled state */
     border: 1px solid #ccc; /* Match the border color */
     color: #999; /* Optional: Change text color if needed */
+  }
+
+  .note-detail__body {
+    background-color: lightgrey;
+     /* Opsional, menambahkan jarak di dalam kontainer */
+    border-radius: 4px; /* Opsional, menambahkan sudut melengkung */
+  }
+
+  .note-item-detail__title{
+    font-size: 3rem;
+    padding: 0.5rem;
+  }
+
+  .note-item-detail__date{
+    font-size: 2rem;
+    padding: 0.5rem;
+  }
+
+  .note-item-detail__body{
+    font-size: 2rem;
+    padding: 0.5rem;
   }
   
   @media only screen and (min-width: 500px) {
