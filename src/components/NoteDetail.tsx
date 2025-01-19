@@ -12,6 +12,7 @@ import UnarchiveButton from "./UnarchivedButton";
 import { useNavigate } from "react-router-dom";
 import { FaPaperclip } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import parser from "html-react-parser";
 
 const NoteDetail: React.FC<Note> = ({
   id,
@@ -41,7 +42,7 @@ const NoteDetail: React.FC<Note> = ({
           <FaPaperclip /> {title}
         </h3>
         <p className="note-item-detail__date">{showFormattedDate(createdAt)}</p>
-        <p className="note-item-detail__body">{body}</p>
+        <p className="note-item-detail__body">{parser(body)}</p>
       </div>
       <div className="note-item__action">
         <DeleteButton id={id} onDelete={handleDelete} />
