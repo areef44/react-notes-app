@@ -2,7 +2,6 @@ import React from "react";
 import NoteList from "../components/NoteList";
 import { useSearchParams } from "react-router-dom";
 import { deleteNote, getNotes, archivedNote } from "../utils";
-import autoBind from "auto-bind";
 import Note from "../interface/noteIface";
 import SearchBar from "../components/SearchBar";
 import PropTypes from "prop-types";
@@ -44,24 +43,23 @@ class HomePage extends React.Component<HomePageProps, NoteAppState> {
       notes: getNotes(),
       keyword: props.defaultKeyword || "",
     };
-    autoBind(this);
   }
 
-  onDeleteHandler(id: number) {
+  onDeleteHandler = (id: number): void => {
     deleteNote(id);
     this.setState({ notes: getNotes() });
-  }
+  };
 
-  onKeywordChangeHandler(keyword: string) {
+  onKeywordChangeHandler = (keyword: string): void => {
     this.setState({ keyword }, () => {
       this.props.keywordChange(keyword);
     });
-  }
+  };
 
-  onArchiveHandler(id: number) {
+  onArchiveHandler = (id: number): void => {
     archivedNote(id);
     this.setState({ notes: getNotes() });
-  }
+  };
 
   render() {
     const { keyword, notes } = this.state;

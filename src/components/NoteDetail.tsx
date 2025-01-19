@@ -25,15 +25,15 @@ const NoteDetail: React.FC<Note> = ({
 
   const handleDelete = () => {
     deleteNote(id);
-    navigate("/");
+    navigate(-1);
   };
   const handleArchive = () => {
     archivedNote(id);
-    navigate("/");
+    navigate(-1);
   };
   const handleUnarchive = () => {
     unArchivedNote(id);
-    navigate("/");
+    navigate(-1);
   };
   return (
     <div className="note-app__body note-detail__body">
