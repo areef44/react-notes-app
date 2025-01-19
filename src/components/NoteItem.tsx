@@ -1,17 +1,15 @@
 import React from "react";
 import Note from "../interface/noteIface";
 import NoteItemContent from "./NoteItemContent";
+import PropTypes from "prop-types";
 
 interface NoteItemProps {
   note: Note;
 }
 
-const NoteItem: React.FC<NoteItemProps> = ({
-  note,
-}) => {
+const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
   return (
     <div className="note-item">
-    
       <NoteItemContent
         id={note.id}
         title={note.title}
@@ -21,6 +19,16 @@ const NoteItem: React.FC<NoteItemProps> = ({
       />
     </div>
   );
+};
+
+NoteItem.propTypes = {
+  note: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    archived: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 export default NoteItem;

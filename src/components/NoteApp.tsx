@@ -2,7 +2,7 @@ import React from "react";
 import NoteHeader from "./NoteHeader";
 import HomePage from "../pages/HomePage";
 import AddPage from "../pages/AddPage";
-import DetailPage from "../pages/DetailPage"
+import DetailPage from "../pages/DetailPage";
 import { Route, Routes } from "react-router-dom";
 import ArchivePage from "../pages/ArchivePage";
 import NotFound from "./NotFound";
