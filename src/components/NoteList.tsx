@@ -12,7 +12,7 @@ interface NotesListProps {
 
 const NoteList : React.FC<NotesListProps> = ({ notes,onDelete, onArchive, onUnarchive}) => {
         return (
-            <div className="note-app__body">
+            <div className="note-app__content">
                 <div className="notes-list">
                     {
                     notes.map((note) => (

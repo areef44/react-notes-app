@@ -18,7 +18,7 @@
   .navigation ul li a {
     font-size: 16px;
     color: white;
-    font-weight: bold;
+    font-weight: bold;margin-top: 10vh;
   }
   
   input, textarea {
@@ -64,6 +64,11 @@
   }
   
   .note-app__body {
+    max-width: 1000px;
+    margin: 10vh auto;
+  }
+
+  .note-app__content {
     max-width: 1000px;
     margin: 16px auto;
   }
@@ -292,6 +297,25 @@
     padding: 0.5rem;
   }
   
+  .container {
+    text-align: center;
+    margin-top: 10vh;
+  }
+
+  .title__notfound {
+    width: 500px;
+  }
+
+  .message {
+    font-size : 24px;
+    margin-bottom : 20px;
+  }
+
+  .link__notfound {
+    font-size: 18px;
+    color: '#007BFF';
+  }
+
   @media only screen and (min-width: 500px) {
     .notes-list {
       grid-template-columns: 1fr 1fr;
