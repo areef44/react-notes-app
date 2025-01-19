@@ -1,4 +1,6 @@
 import React from "react";
+import { FaRegCircleDown } from "react-icons/fa6";
+import PropTypes from "prop-types";
 
 interface ArchiveButtonProps {
   id: number;
@@ -12,9 +14,14 @@ const ArchiveButton: React.FC<ArchiveButtonProps> = ({ id, onArchive }) => {
 
   return (
     <button className="note-item__archive-button" onClick={handleArchive}>
-      Arsipkan
+      <FaRegCircleDown />
     </button>
   );
+};
+
+ArchiveButton.propTypes = {
+  id: PropTypes.number.isRequired,
+  onArchive: PropTypes.func.isRequired,
 };
 
 export default ArchiveButton;

@@ -1,0 +1,355 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #ffffff;
+  color: #111827;
+}
+
+.navigation ul li {
+  display: inline-block;
+  padding: 16px;
+}
+
+.navigation ul li a {
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  margin-top: 10vh;
+}
+
+input,
+textarea {
+  padding: 12px;
+  margin: 12px 0;
+  font-family: "Roboto", sans-serif;
+  background-color: transparent;
+  color: black;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.input-search {
+  width: 500px;
+  padding: 12px;
+  margin: 0;
+  margin-bottom: 2rem;
+  font-family: "Roboto", sans-serif;
+  background-color: whitesmoke;
+  color: black;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+  font-weight: bold;
+}
+
+.note-app__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px;
+  border-bottom: 1px solid #ff5f52;
+  background-color: #ff5f52;
+}
+
+.note-app__header h1 {
+  margin: 8px 0;
+  flex: 1;
+  color: white;
+}
+
+.note-app__body {
+  max-width: 1000px;
+  margin: 10vh auto;
+}
+
+.note-app__content {
+  max-width: 1000px;
+  margin: 16px auto;
+}
+
+.note-app__body h2 {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.note-input {
+  background-color: #ffffff;
+  margin: 0 auto;
+  padding: 1rem;
+  border-radius: 5px;
+  max-width: 1000px;
+  margin-bottom: 48px;
+  border: 1px solid #e5e7eb;
+}
+
+.note-input input,
+.note-input textarea {
+  display: block;
+  width: 100%;
+}
+
+.note-input input:focus,
+.note-input textarea:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Efek bayangan fokus */
+}
+
+.note-input__title {
+  font-weight: bold;
+}
+
+.note-input__title__char-limit {
+  font-size: 14px;
+  text-align: right;
+  color: #aaa;
+}
+
+.note-input__body {
+  min-height: 175px;
+}
+
+.note-input .button-group {
+  display: flex;
+  gap: 10px; /* Jarak antar tombol */
+}
+
+.note-input .button-group .button-submit {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background-color: #3b82f6;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  border: 1px solid #3b82f6;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.note-input .button-group .button-disabled {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background-color: grey;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  border: 1px solid grey;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: not-allowed;
+  margin-top: 8px;
+}
+
+.note-input .button-group .button-clear:hover {
+  background-color: black; /* Warna biru lebih gelap saat hover */
+  border-color: black; /* Sinkron dengan background */
+  color: whitesmoke;
+}
+
+.note-input .button-group .button-clear {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background-color: lightgrey;
+  font-family: "Roboto", sans-serif;
+  color: black;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.notes-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(min-content, max-content);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.notes-list__empty-message {
+  text-align: center;
+  color: #aaa;
+  padding: 16px;
+}
+
+.note-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+}
+
+.note-item__content {
+  padding: 12px;
+  flex: 1;
+}
+
+.note-item__title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 4px;
+}
+
+.note-item__date {
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: grey;
+}
+
+.note-item__body {
+  font-size: 14px;
+}
+
+.note-item__action {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+.note-item__delete-button,
+.note-item__archive-button,
+.note-item__unarchive-button {
+  font-size: 3rem;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.note-item__delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border-radius: 10%;
+}
+
+.note-item__archive-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border-radius: 10%;
+}
+
+.note-item__unarchive-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border-radius: 10%;
+}
+
+.note-item__archive-button:hover {
+  background-color: white;
+  color: #ffcc00;
+}
+
+.note-item__unarchive-button:hover {
+  background-color: white;
+  color: #198754;
+}
+
+.note-item__delete-button:hover {
+  background-color: white;
+  color: red;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button[disabled]:hover {
+  background-color: #ccc; /* Same color as the disabled state */
+  border: 1px solid #ccc; /* Match the border color */
+  color: #999; /* Optional: Change text color if needed */
+}
+
+.note-detail__body {
+  background-color: lightgrey;
+  /* Opsional, menambahkan jarak di dalam kontainer */
+  border-radius: 4px; /* Opsional, menambahkan sudut melengkung */
+}
+
+.note-item-detail__title {
+  font-size: 3rem;
+  padding: 0.5rem;
+}
+
+.note-item-detail__date {
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+
+.note-item-detail__body {
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+
+.container {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.title__notfound {
+  width: 500px;
+}
+
+.message {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.link__notfound {
+  font-size: 18px;
+  color: "#007BFF";
+}
+
+.add-new-page__input__body {
+  background-color: initial;
+  border: 1px solid lightgray;
+  font-family: Inter, sans-serif;
+  font-size: 24px;
+  min-height: 500px;
+  padding: 8px 0;
+  width: 100%;
+  color: black;
+}
+
+@media only screen and (min-width: 500px) {
+  .notes-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .notes-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .note-search input {
+    min-width: 400px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .notes-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
