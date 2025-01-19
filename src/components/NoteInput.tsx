@@ -25,8 +25,9 @@ class NoteInput extends React.Component<NotesInputProps, NotesInputState> {
     }
   }
 
-  onBodyChangeEventHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    this.setState({ body: event.target.value });
+  onInputHandler(event: React.FormEvent<HTMLDivElement>) {
+    const body = event.currentTarget.textContent || "";
+    this.setState({ body });
   }
 
   onSubmitEventHandler(event: React.FormEvent<HTMLFormElement>) {
@@ -60,10 +61,10 @@ class NoteInput extends React.Component<NotesInputProps, NotesInputState> {
             value={this.state.title}
             onChange={this.onTitleChangeEventHandler}
           />
-          <textarea
-            placeholder="Masukkan catatanmu disini..."
-            value={this.state.body}
-            onChange={this.onBodyChangeEventHandler}
+          <div
+            contentEditable
+            onInput={this.onInputHandler}
+            className="add-new-page__input__body"
           />
           <div className="button-group">
             <button

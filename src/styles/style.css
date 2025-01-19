@@ -321,6 +321,17 @@ button[disabled]:hover {
   color: "#007BFF";
 }
 
+.add-new-page__input__body {
+  background-color: initial;
+  border: 1px solid lightgray;
+  font-family: Inter, sans-serif;
+  font-size: 24px;
+  min-height: 500px;
+  padding: 8px 0;
+  width: 100%;
+  color: black;
+}
+
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;

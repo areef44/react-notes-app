@@ -4,6 +4,7 @@ import { showFormattedDate } from "../utils";
 import { Link } from "react-router-dom";
 import { FaPaperclip } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import parser from "html-react-parser";
 
 interface NoteItemContentProps extends Note {}
 
@@ -21,7 +22,7 @@ const NoteItemContent: React.FC<NoteItemContentProps> = ({
         </h3>
       </Link>
       <p className="note-item__date">{showFormattedDate(createdAt)}</p>
-      <p className="note-item__body">{body}</p>
+      <p className="note-item__body">{parser(body)}</p>
     </div>
   );
 };
