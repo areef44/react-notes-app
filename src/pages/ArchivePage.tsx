@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import autoBind from "auto-bind";
 import Note from "../interface/noteIface";
 import SearchBar from "../components/SearchBar";
+import PropTypes from "prop-types";
 
 interface NoteAppState {
   notes: Note[];
@@ -33,6 +34,12 @@ const ArchivePageWrapper: React.FC = () => {
 };
 
 class ArchivePage extends React.Component<ArchivePageProps, NoteAppState> {
+  // add props type
+  static propTypes = {
+    defaultKeyword: PropTypes.string.isRequired,
+    keywordChange: PropTypes.func.isRequired,
+  };
+
   constructor(props: ArchivePageProps) {
     super(props);
     this.state = {

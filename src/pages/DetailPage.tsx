@@ -3,6 +3,7 @@ import NoteDetail from "../components/NoteDetail";
 import { getNote } from "../utils";
 import { useParams } from "react-router-dom";
 import Note from "../interface/noteIface";
+import PropTypes from "prop-types";
 
 // State untuk DetailPage
 interface DetailPageState {
@@ -20,6 +21,10 @@ const DetailPageWrapper: React.FC = () => {
 };
 
 class DetailPage extends React.Component<DetailPageProps, DetailPageState> {
+  // add props type
+  static propTypes = {
+    id: PropTypes.number.isRequired,
+  };
   constructor(props: DetailPageProps) {
     super(props);
 

@@ -5,6 +5,7 @@ import { deleteNote, getNotes, archivedNote } from "../utils";
 import autoBind from "auto-bind";
 import Note from "../interface/noteIface";
 import SearchBar from "../components/SearchBar";
+import PropTypes from "prop-types";
 
 interface NoteAppState {
   notes: Note[];
@@ -18,7 +19,7 @@ interface HomePageProps {
 
 const HomePageWrapper: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const defaultKeyword = searchParams.get("keyword") || "";
+  const defaultKeyword = searchParams.get("keyword") || ""; // Menambahkan default value
 
   // Menambahkan tipe pada parameter
   const keywordChange = (keyword: string): void => {
@@ -31,6 +32,12 @@ const HomePageWrapper: React.FC = () => {
 };
 
 class HomePage extends React.Component<HomePageProps, NoteAppState> {
+  // add props type
+  static propTypes = {
+    defaultKeyword: PropTypes.string.isRequired,
+    keywordChange: PropTypes.func.isRequired,
+  };
+
   constructor(props: HomePageProps) {
     super(props);
     this.state = {
