@@ -2,11 +2,15 @@ import React from "react";
 import NoteHeader from "./NoteHeader";
 import { Outlet } from "react-router-dom";
 
-const NoteLayout: React.FC = () => {
+interface NoteLayoutProps {
+  onLogout: () => void;
+}
+
+const NoteLayout: React.FC<NoteLayoutProps> = ({ onLogout }) => {
   return (
     <div>
       <header>
-        <NoteHeader />
+        <NoteHeader logout={onLogout}/>
       </header>
       <main>
         <Outlet /> 
