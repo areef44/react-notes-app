@@ -4,10 +4,10 @@ import DeleteButton from "./DeleteButton";
 import ArchiveButton from "./ArchivedButton";
 import {
   deleteNote,
-  archivedNote,
-  showFormattedDate,
-  unArchivedNote,
-} from "../utils";
+  archiveNote,
+  unarchiveNote,
+} from "../utils/api";
+import { showFormattedDate } from "../utils";
 import UnarchiveButton from "./UnarchivedButton";
 import { useNavigate } from "react-router-dom";
 import { FaPaperclip } from "react-icons/fa6";
@@ -23,17 +23,34 @@ const NoteDetail: React.FC<Note> = ({
 }) => {
   const navigate = useNavigate();
 
-  const handleDelete = () => {
-    deleteNote(id);
-    navigate(-1);
+  const handleDelete = async () => {
+    try {
+      await deleteNote(id);
+      navigate(-1); 
+    } catch (error) {
+      console.error("Failed to delete note:", error);
+    }
+    
   };
-  const handleArchive = () => {
-    archivedNote(id);
-    navigate(-1);
+  const handleArchive = async () => {
+    try {
+      await archiveNote(id);
+      navigate(-1);
+    } catch (error) {
+      console.error("Failed to archive note:", error);
+    }
+    
+    
   };
-  const handleUnarchive = () => {
-    unArchivedNote(id);
-    navigate(-1);
+  const handleUnarchive = async () => {
+    try {
+      await unarchiveNote(id);
+      navigate(-1);
+    } catch (error) {
+      console.error("Failed to archive note:", error);
+    }
+    
+    
   };
   return (
     <div className="note-app__body note-detail__body">
@@ -57,7 +74,7 @@ const NoteDetail: React.FC<Note> = ({
 };
 
 NoteDetail.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired, // Tanggal dalam format string
   body: PropTypes.string.isRequired,

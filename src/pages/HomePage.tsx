@@ -1,93 +1,57 @@
 import React from "react";
 import NoteList from "../components/NoteList";
 import { useSearchParams } from "react-router-dom";
-import { deleteNote, getNotes, archivedNote } from "../utils";
+import { getActiveNotes,deleteNote } from "../utils/api";
 import Note from "../interface/noteIface";
 import SearchBar from "../components/SearchBar";
-import PropTypes from "prop-types";
 
-interface NoteAppState {
-  notes: Note[];
-  keyword: string;
-}
+const HomePage: React.FC = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [notes, setNotes] = React.useState<Note[]>([]);
+    const [keyword, setKeyword] = React.useState<string>(
+      searchParams.get("keyword") || ""
+    ); // Menambahkan default value
 
-interface HomePageProps {
-  defaultKeyword: string;
-  keywordChange: (keyword: string) => void;
-}
-
-const HomePageWrapper: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const defaultKeyword = searchParams.get("keyword") || ""; // Menambahkan default value
-
-  // Menambahkan tipe pada parameter
-  const keywordChange = (keyword: string): void => {
-    setSearchParams({ keyword });
-  };
-
-  return (
-    <HomePage defaultKeyword={defaultKeyword} keywordChange={keywordChange} />
-  );
-};
-
-class HomePage extends React.Component<HomePageProps, NoteAppState> {
-  // add props type
-  static propTypes = {
-    defaultKeyword: PropTypes.string.isRequired,
-    keywordChange: PropTypes.func.isRequired,
-  };
-
-  constructor(props: HomePageProps) {
-    super(props);
-    this.state = {
-      notes: getNotes(),
-      keyword: props.defaultKeyword || "",
+    const keywordChange = (keyword: string): void => {
+      setSearchParams({ keyword });
+      setKeyword(keyword);
     };
-  }
 
-  onDeleteHandler = (id: number): void => {
-    deleteNote(id);
-    this.setState({ notes: getNotes() });
-  };
+    React.useEffect(() => {
+      getActiveNotes().then(({ data }) => {
+        setNotes(data || []);
+      });
+    },[])
 
-  onKeywordChangeHandler = (keyword: string): void => {
-    this.setState({ keyword }, () => {
-      this.props.keywordChange(keyword);
-    });
-  };
+    async function onDeleteHandler (id: string) {
+      await deleteNote(id);
+      const { data } = await getActiveNotes();
+      setNotes(data || [])
+    };
 
-  onArchiveHandler = (id: number): void => {
-    archivedNote(id);
-    this.setState({ notes: getNotes() });
-  };
-
-  render() {
-    const { keyword, notes } = this.state;
+    function onKeywordChangeHandler(keyword: string) {
+      keywordChange(keyword)
+    }
 
     const filteredNotes = notes.filter((note) =>
       note.title.toLowerCase().includes(keyword.toLowerCase())
     );
 
     return (
-      <div className="note-app__body">
-        <h2>Cari Catatan</h2>
-        <SearchBar
-          keyword={keyword}
-          keywordChange={this.onKeywordChangeHandler}
-        />
-        <h2>Daftar Catatan</h2>
-        {filteredNotes.filter((note) => !note.archived).length === 0 ? (
-          <p className="notes-list__empty-message">Tidak Ada Catatan</p>
-        ) : (
-          <NoteList
-            notes={filteredNotes.filter((note) => !note.archived)}
-            onDelete={this.onDeleteHandler}
-            onArchive={this.onArchiveHandler}
-          />
-        )}
-      </div>
+            <div className="note-app__body">
+              <h2>Cari Catatan</h2>
+              <SearchBar
+                keyword={keyword}
+                keywordChange={onKeywordChangeHandler}
+              />
+              <h2>Daftar Catatan</h2>
+              {filteredNotes.length === 0 ? (
+                <p className="notes-list__empty-message">Tidak Ada Catatan</p>
+              ) : (
+                <NoteList notes={filteredNotes} onDelete={onDeleteHandler} />
+              )}
+            </div>
     );
-  }
 }
 
-export default HomePageWrapper;
+export default HomePage

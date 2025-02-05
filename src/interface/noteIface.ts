@@ -1,5 +1,5 @@
 interface Note {
-    id: number;
+    id: string;
     title: string;
     body: string;
     createdAt: string; // Bisa menggunakan Date jika ingin menyimpan sebagai objek Date

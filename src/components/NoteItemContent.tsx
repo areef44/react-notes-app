@@ -28,7 +28,7 @@ const NoteItemContent: React.FC<NoteItemContentProps> = ({
 };
 
 NoteItemContent.propTypes = {
-  id: PropTypes.number.isRequired, // ID harus berupa angka dan wajib diisi
+  id: PropTypes.string.isRequired, // ID harus berupa angka dan wajib diisi
   title: PropTypes.string.isRequired, // Title harus berupa string dan wajib diisi
   createdAt: PropTypes.string.isRequired, // CreatedAt harus berupa string dan wajib diisi
   body: PropTypes.string.isRequired, // Body harus berupa string dan wajib diisi

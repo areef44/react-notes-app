@@ -196,6 +196,7 @@ async function deleteNote(id: string): Promise<ApiResponse<void>> {
   return { error: false, data: null };
 }
 
+
 export {
   getAccessToken,
   putAccessToken,
@@ -208,5 +209,5 @@ export {
   getNote,
   archiveNote,
   unarchiveNote,
-  deleteNote,
+  deleteNote
 };

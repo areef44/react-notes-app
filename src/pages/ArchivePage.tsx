@@ -1,100 +1,58 @@
 import React from "react";
 import NoteList from "../components/NoteList";
-import { deleteNote, getNotes, unArchivedNote } from "../utils";
 import { useSearchParams } from "react-router-dom";
-import autoBind from "auto-bind";
 import Note from "../interface/noteIface";
 import SearchBar from "../components/SearchBar";
-import PropTypes from "prop-types";
+import { getArchivedNotes,deleteNote } from "../utils/api";
 
-interface NoteAppState {
-  notes: Note[];
-  keyword: string;
-}
 
-interface ArchivePageProps {
-  defaultKeyword: string;
-  keywordChange: (keyword: string) => void;
-}
-
-const ArchivePageWrapper: React.FC = () => {
+const ArchivePage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const defaultKeyword = searchParams.get("keyword") || "";
+    const [notes, setNotes] = React.useState<Note[]>([]);
+    const [keyword, setKeyword] = React.useState<string>(
+      searchParams.get("keyword") || ""
+    ); // Menambahkan default value
 
-  const keywordChange = (keyword: string): void => {
-    setSearchParams({ keyword });
-  };
-
-  return (
-    <ArchivePage
-      defaultKeyword={defaultKeyword}
-      keywordChange={keywordChange}
-    />
-  );
-};
-
-class ArchivePage extends React.Component<ArchivePageProps, NoteAppState> {
-  // add props type
-  static propTypes = {
-    defaultKeyword: PropTypes.string.isRequired,
-    keywordChange: PropTypes.func.isRequired,
-  };
-
-  constructor(props: ArchivePageProps) {
-    super(props);
-    this.state = {
-      notes: getNotes(),
-      keyword: props.defaultKeyword || "",
+    const keywordChange = (keyword: string): void => {
+      setSearchParams({ keyword });
+      setKeyword(keyword);
     };
-    autoBind(this);
-  }
 
-  onDeleteHandler(id: number) {
-    deleteNote(id);
-    this.setState({ notes: getNotes() });
-  }
+    React.useEffect(() => {
+      getArchivedNotes().then(({ data }) => {
+        setNotes(data || []);
+      });
+    },[])
 
-  onKeywordChangeHandler(keyword: string) {
-    this.setState(() => {
-      return {
-        keyword,
-      };
-    });
+    async function onDeleteHandler (id: string) {
+      await deleteNote(id);
+      const { data } = await getArchivedNotes();
+      setNotes(data || [])
+    };
 
-    this.props.keywordChange(keyword);
-  }
-
-  onUnarchiveHandler(id: number) {
-    unArchivedNote(id);
-    this.setState({ notes: getNotes() });
-  }
-
-  render() {
-    const { keyword, notes } = this.state;
+    function onKeywordChangeHandler(keyword: string) {
+      keywordChange(keyword)
+    }
 
     const filteredNotes = notes.filter((note) =>
       note.title.toLowerCase().includes(keyword.toLowerCase())
     );
+
     return (
       <div className="note-app__body">
         <h2>Cari Catatan</h2>
         <SearchBar
           keyword={keyword}
-          keywordChange={this.onKeywordChangeHandler}
+          keywordChange={onKeywordChangeHandler}
         />
-        <h2>Daftar Arsip</h2>
-        {filteredNotes.filter((note) => note.archived).length === 0 ? (
+        <h2>Daftar Catatan</h2>
+        {filteredNotes.length === 0 ? (
           <p className="notes-list__empty-message">Tidak Ada Catatan</p>
         ) : (
-          <NoteList
-            notes={filteredNotes.filter((note) => note.archived)}
-            onDelete={this.onDeleteHandler}
-            onUnarchive={this.onUnarchiveHandler}
-          />
+          <NoteList notes={filteredNotes} onDelete={onDeleteHandler} />
         )}
       </div>
     );
-  }
 }
 
-export default ArchivePageWrapper;
+export default ArchivePage;

@@ -3,8 +3,8 @@ import { FaRegCircleDown } from "react-icons/fa6";
 import PropTypes from "prop-types";
 
 interface ArchiveButtonProps {
-  id: number;
-  onArchive: (id: number) => void;
+  id: string;
+  onArchive: (id: string) => void;
 }
 
 const ArchiveButton: React.FC<ArchiveButtonProps> = ({ id, onArchive }) => {
@@ -20,7 +20,7 @@ const ArchiveButton: React.FC<ArchiveButtonProps> = ({ id, onArchive }) => {
 };
 
 ArchiveButton.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onArchive: PropTypes.func.isRequired,
 };
 
