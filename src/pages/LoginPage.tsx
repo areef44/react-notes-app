@@ -16,13 +16,20 @@ const LoginPage: React.FC<LoginPageProps> = ({ loginSuccess }) => {
   };
 
   return (
-    <section className="login-page">
-      <h2>Silakan masuk untuk melanjutkan ...</h2>
-      <LoginInput login={onLogin} />
-      <p>
-        Belum punya akun? <Link to="/register">Daftar di sini.</Link>
-      </p>
-    </section>
+    <div className="login-page">
+      <section className="container-login">
+        <div className="text-title-container">
+          <h1>Sign In</h1>
+        </div>
+        <p>Silakan masuk untuk melanjutkan</p>
+        <LoginInput login={onLogin} />
+        <div className="text-container">
+          <p>
+            Belum punya akun? <Link to="/register">Daftar di sini.</Link>
+          </p>
+        </div>
+      </section>
+    </div>
   );
 };
 

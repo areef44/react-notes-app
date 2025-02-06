@@ -1,26 +1,15 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { FormEvent } from "react";
 import PropTypes from "prop-types";
+import useInput from "../hooks/useInput";
 
 interface RegisterInputProps {
   register: (userData: { name: string; email: string; password: string }) => void;
 }
 
 const RegisterInput: React.FC<RegisterInputProps> = ({ register }) => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-  };
-
-  const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const onPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
+  const [name, handleNameChange] = useInput<string>("");
+  const [email, handleEmailChange] = useInput<string>("");
+  const [password, handlePasswordChange] = useInput<string>("");
 
   const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -38,20 +27,20 @@ const RegisterInput: React.FC<RegisterInputProps> = ({ register }) => {
         type="text"
         placeholder="Nama"
         value={name}
-        onChange={onNameChange}
+        onChange={handleNameChange}
       />
       <input
         type="email"
         placeholder="Email"
         value={email}
-        onChange={onEmailChange}
+        onChange={handleEmailChange}
       />
       <input
         type="password"
         placeholder="Password"
         autoComplete="current-password"
         value={password}
-        onChange={onPasswordChange}
+        onChange={handlePasswordChange}
       />
       <button type="submit">Register</button>
     </form>

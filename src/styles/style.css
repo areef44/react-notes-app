@@ -1,3 +1,25 @@
+:root {
+  --font-color: #000;
+  --background-color: #eee;
+  --background-card-color: lightgrey;
+  --background-header-color: #ff5f52;
+  --background-border-color:  #ff5f52;
+  --background-input-color:  #fff;
+  --background-input-border:  #fff;
+  --background-input-border-color: #fff;
+}
+ 
+[data-theme='dark'] {
+  --font-color: #eee;
+  --background-color: #000;
+  --background-card-color: #000;
+  --background-header-color: #000;
+  --background-border-color:  #eee;
+  --background-input-color:  #000;
+  --background-input-border:  #000;
+  --background-input-border-color: #fff;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -6,8 +28,8 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #ffffff;
-  color: #111827;
+  background-color: var(--background-color);
+  color: var(--font-color);
 }
 
 .navigation ul li {
@@ -28,7 +50,7 @@ textarea {
   margin: 12px 0;
   font-family: "Roboto", sans-serif;
   background-color: transparent;
-  color: black;
+  color: var(--font-color);
   border: 1px solid #aaa;
   border-radius: 4px;
 }
@@ -56,8 +78,8 @@ textarea::placeholder {
   align-items: center;
   justify-content: center;
   padding: 4px 16px;
-  border-bottom: 1px solid #ff5f52;
-  background-color: #ff5f52;
+  border-bottom: 1px solid var(--background-border-color);
+  background-color: var(--background-header-color);
 }
 
 .note-app__header h1 {
@@ -82,13 +104,13 @@ textarea::placeholder {
 }
 
 .note-input {
-  background-color: #ffffff;
+  background-color: var(--background-input-color);
   margin: 0 auto;
   padding: 1rem;
   border-radius: 5px;
   max-width: 1000px;
   margin-bottom: 48px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--background-input-border);
 }
 
 .note-input input,
@@ -191,12 +213,15 @@ textarea::placeholder {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: lightgray;
+  background-color: var(--background-card-color);
 }
 
 .note-item__content {
   padding: 12px;
   flex: 1;
+  background-color: var(--background-card-color);
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
 }
 
 .note-item__title {
@@ -220,6 +245,9 @@ textarea::placeholder {
   display: flex;
   justify-content: end;
   gap: 0.5rem;
+  background-color: var(--background-card-color);
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
 }
 
 .note-item__delete-button,
@@ -329,7 +357,60 @@ button[disabled]:hover {
   min-height: 500px;
   padding: 8px 0;
   width: 100%;
-  color: black;
+  color: var(--font-color);
+}
+
+.login-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container-login{
+  background-color: var(--background-input-border);
+	border-radius: 10px;
+  border: 1px solid var(--background-input-border-color);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+	0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 400px;
+	max-width: 100%;
+  padding: 2rem 3rem 2rem 3rem;
+  align-self: center;
+}
+
+.login-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-input .login-button {
+  border-radius: 20px;
+	border: 1px solid #ff5f52;
+	background-color: #ff5f52;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+  padding: 0.5rem;
+  margin: 1rem 1rem 1.5rem 1rem;
+  cursor: pointer;
+}
+
+.text-title-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.text-container {
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (min-width: 500px) {

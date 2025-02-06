@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { FormEvent } from "react";
+import useInput from "../hooks/useInput";
 import PropTypes from "prop-types";
 
 interface LoginInputProps {
@@ -6,16 +7,8 @@ interface LoginInputProps {
 }
 
 const LoginInput: React.FC<LoginInputProps> = ({ login }) => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
+  const [email, handleEmailChange] = useInput<string>("");
+  const [password, handlePasswordChange] = useInput<string>("");
 
   const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -23,21 +16,21 @@ const LoginInput: React.FC<LoginInputProps> = ({ login }) => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="login-input">
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={onEmailChangeHandler}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={onPasswordChangeHandler}
-      />
-      <button>Masuk</button>
-    </form>
+      <form onSubmit={onSubmitHandler} className="login-input">
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleEmailChange}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+        <button className="login-button">Masuk</button>
+      </form>
   );
 };
 
