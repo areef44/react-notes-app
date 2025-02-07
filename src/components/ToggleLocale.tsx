@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import LocaleContext from '../contexts/LocaleContext';
-
+import { FaLanguage } from 'react-icons/fa6';
+ 
 const ToggleLocale = () => {
-  const { localeContext, toggleLocale } = useContext(LocaleContext);
+  const { toggleLocale } = useContext(LocaleContext);
 
   return (
-    <button onClick={toggleLocale}>
-      {localeContext === 'id' ? <p>en</p> : <p>id</p>}
-    </button>
+    <div onClick={toggleLocale} className='menu-style'>
+      <FaLanguage size={25}/> 
+    </div>
   );
 };
 

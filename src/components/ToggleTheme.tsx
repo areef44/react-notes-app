@@ -6,9 +6,9 @@ const ToggleTheme = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <button onClick={toggleTheme}>
-      {theme === 'light' ? <FaMoon /> : <FaSun />}
-    </button>
+    <div onClick={toggleTheme} className='menu-style'>
+      {theme === 'light' ? <FaMoon size={20}/> : <FaSun size={20}/>}
+    </div>
   );
 };
 

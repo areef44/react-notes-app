@@ -437,6 +437,14 @@ button[disabled]:hover {
   justify-content: center;
 }
 
+.menu-style{
+  margin-right: 16px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  size: 1rem;
+}
+
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;

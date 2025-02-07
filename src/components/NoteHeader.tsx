@@ -18,7 +18,7 @@ const NoteHeader: React.FC<NoteHeaderProps> = ({logout}) => {
       <Navigation />
       <ToggleLocale />
       <ToggleTheme />
-      <button onClick={logout}>{localeContext === "id" ? "Keluar" : "Logout"} <FiLogOut /></button>
+      <div onClick={logout} className="menu-style"><FiLogOut size={25}/></div>
     </div>
   );
 };
