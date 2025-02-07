@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./styles/style.css";
 import App from "./App";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 // Non-null assertion untuk memastikan elemen root ada
 const root = createRoot(document.getElementById("root")!);

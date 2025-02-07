@@ -32,6 +32,10 @@ body {
   color: var(--font-color);
 }
 
+.navigation{
+  margin-right: 2rem;
+}
+
 .navigation ul li {
   display: inline-block;
   padding: 16px;
@@ -445,6 +449,24 @@ button[disabled]:hover {
   size: 1rem;
 }
 
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh; /* Full viewport height */
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: #ff5f52;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;
@@ -464,5 +486,14 @@ button[disabled]:hover {
 @media only screen and (min-width: 800px) {
   .notes-list {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
