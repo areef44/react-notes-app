@@ -5,16 +5,10 @@ import PropTypes from "prop-types";
 
 interface NotesListProps {
   notes: Note[];
-  onDelete: (id: string) => void;
-  onArchive?: (id: string) => void;
-  onUnarchive?: (id: number) => void;
 }
 
 const NoteList: React.FC<NotesListProps> = ({
   notes,
-  onDelete,
-  onArchive,
-  onUnarchive,
 }) => {
   return (
     <div className="note-app__content">
@@ -23,9 +17,6 @@ const NoteList: React.FC<NotesListProps> = ({
           <NoteItem
             key={note.id}
             note={note}
-            onDelete={onDelete}
-            onArchive={onArchive}
-            onUnarchive={onUnarchive}
           />
         ))}
       </div>
@@ -33,19 +24,16 @@ const NoteList: React.FC<NotesListProps> = ({
   );
 };
 
+const NoteShape = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  archived: PropTypes.bool.isRequired,
+};
+
 NoteList.propTypes = {
-  notes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      createdAt: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
-      archived: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onArchive: PropTypes.func,
-  onUnarchive: PropTypes.func,
+  notes: PropTypes.arrayOf(PropTypes.shape(NoteShape).isRequired).isRequired,
 };
 
 export default NoteList;

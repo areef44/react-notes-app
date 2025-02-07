@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LoginInput from "../components/LoginInput";
 import { login, LoginParams } from "../utils/api";
 import LocaleContext from "../contexts/LocaleContext";
+import PropTypes from "prop-types";
 
 interface LoginPageProps {
   loginSuccess: (data: any) => void;
@@ -34,5 +35,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ loginSuccess }) => {
     </div>
   );
 };
+
+LoginPage.propTypes = {
+  loginSuccess: PropTypes.func.isRequired
+}
 
 export default LoginPage;
