@@ -1,13 +1,12 @@
 import React from "react";
 import { addNote } from "../utils/api";
 import NoteInput from "../components/NoteInput";
-import Note from "../interface/noteIface";
 import { useNavigate } from "react-router-dom";
 
 const AddPage: React.FC = () => {
   const navigate = useNavigate();
   // Menambahkan tipe untuk note
-  async function onAddNoteHandler(note: Note) {
+  async function onAddNoteHandler(note: {title: string; body: string;}) {
     try {
       await addNote(note);
       navigate("/");

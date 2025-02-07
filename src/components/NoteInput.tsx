@@ -1,92 +1,98 @@
-import React from "react";
-import { NotesInputProps, NotesInputState } from "../interface/noteInputIface";
-import autoBind from "auto-bind";
+import React, { useContext, useRef } from "react";
+import { NotesInputProps } from "../interface/noteInputIface";
+import useInputNote from "../hooks/useInputNote";
 import PropTypes from "prop-types";
+import LocaleContext from "../contexts/LocaleContext";
 
-class NoteInput extends React.Component<NotesInputProps, NotesInputState> {
-  static propTypes: { addNote: PropTypes.Validator<(...args: any[]) => any> };
-  constructor(props: NotesInputProps) {
-    super(props);
-    // inisialisasi state
-    this.state = {
-      title: "",
-      body: "",
-      titleCharCount: 0,
-    };
-    // binding method
-    autoBind(this);
-  }
+const NoteInput: React.FC<NotesInputProps> = ({ addNote }) => {
+  const { localeContext } = useContext(LocaleContext);
+  const {
+    value: title,
+    handleChange: handleTitleChange,
+    resetValue: resetTitle,
+    charCount: titleCharCount,
+  } = useInputNote("", 50);
+  const {
+    value: body,
+    handleChange: handleBodyChange,
+    resetValue: resetBody,
+  } = useInputNote("");
 
-  onTitleChangeEventHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    const title = event.target.value;
-    if (title.length <= 50) {
-      const titleCharCount = title.length;
-      this.setState({ title, titleCharCount });
-    }
-  }
+  const isSubmitDisabled = title === "" || body === "";
 
-  onInputHandler(event: React.FormEvent<HTMLDivElement>) {
-    const body = event.currentTarget.textContent || "";
-    this.setState({ body });
-  }
+  const bodyRef = useRef<HTMLDivElement>(null);
 
-  onSubmitEventHandler(event: React.FormEvent<HTMLFormElement>) {
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { title, body } = this.state;
-    this.props.addNote({ title, body });
-    this.onClearHandler();
-  }
+    addNote({ title, body });
+    resetTitle();
+    resetBody();
+    if (bodyRef.current) {
+      bodyRef.current.innerText = "";
+    }
+  };
 
-  onClearHandler() {
-    this.setState({
-      title: "",
-      body: "",
-      titleCharCount: 0,
-    });
-  }
+  const onClearHandler = () => {
+    resetTitle();
+    if (bodyRef.current) {
+      bodyRef.current.innerText = "";
+    }
+  };
 
-  render() {
-    const isSubmitDisabled = this.state.title === "" || this.state.body === "";
-
-    return (
-      <div className="note-app__body">
-        <h2>Buat Catatan</h2>
-        <form className="note-input" onSubmit={this.onSubmitEventHandler}>
-          <p className="note-input__title__char-limit">
-            Sisa Karakter: {50 - this.state.titleCharCount}
-          </p>
-          <input
-            type="text"
-            placeholder="Masukkan judul disini..."
-            value={this.state.title}
-            onChange={this.onTitleChangeEventHandler}
-          />
-          <div
-            contentEditable
-            onInput={this.onInputHandler}
-            className="add-new-page__input__body"
-          />
-          <div className="button-group">
-            <button
-              className="button-clear"
-              type="button"
-              onClick={this.onClearHandler}
-            >
-              Clear
-            </button>
-            <button
-              className={isSubmitDisabled ? "button-disabled" : "button-submit"}
-              type="submit"
-              disabled={isSubmitDisabled}
-            >
-              Buat
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="note-app__body">
+      <h2>{localeContext === "id" ? "Buat Catatan" : "Create Note"}</h2>
+      <form className="note-input" onSubmit={onSubmitHandler}>
+        <p className="note-input__title__char-limit">
+          {localeContext === "id" ? "Sisa Karakter" : "Remaining Character"} :{" "}
+          {50 - titleCharCount}
+        </p>
+        <input
+          type="text"
+          placeholder={
+            localeContext === "id"
+              ? "Masukkan judul disini..."
+              : "Input title here... "
+          }
+          value={title}
+          onChange={handleTitleChange}
+        />
+        <div
+          ref={bodyRef}
+          contentEditable
+          data-placeholder={localeContext === 'id' ? 'Masukkan konten di sini...' : 'Input content here..'}
+          onInput={(e) => {
+            const target = e.target as HTMLDivElement;
+            if (!target.textContent?.trim()) {
+              target.innerHTML = ""; // Pastikan benar-benar kosong
+            }
+            handleBodyChange(e);
+          }}
+          className="add-new-page__input__body"
+          spellCheck={false}
+          role="textbox"
+          aria-label="Input konten catatan"
+        />
+        <div className="button-group">
+          <button
+            className="button-clear"
+            type="button"
+            onClick={onClearHandler}
+          >
+            {localeContext === "id" ? "Bersihkan" : "Clear"}
+          </button>
+          <button
+            className={isSubmitDisabled ? "button-disabled" : "button-submit"}
+            type="submit"
+            disabled={isSubmitDisabled}
+          >
+            {localeContext === "id" ? "Buat" : "Create"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 NoteInput.propTypes = {
   addNote: PropTypes.func.isRequired,

@@ -355,16 +355,26 @@ button[disabled]:hover {
   font-family: Inter, sans-serif;
   font-size: 24px;
   min-height: 500px;
-  padding: 8px 0;
+  padding: 8px;
   width: 100%;
-  color: var(--font-color);
+  color: var(--font-color, #333);
+  outline: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.add-new-page__input__body:empty::before {
+  content: attr(data-placeholder);
+  color: lightgray;
+  font-style: italic;
+  pointer-events: none;
 }
 
 .login-page{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 }
 
 .container-login{
@@ -376,6 +386,20 @@ button[disabled]:hover {
 	position: relative;
 	overflow: hidden;
 	width: 400px;
+	max-width: 100%;
+  padding: 2rem 3rem 2rem 3rem;
+  align-self: center;
+}
+
+.container-register{
+  background-color: var(--background-input-border);
+	border-radius: 10px;
+  border: 1px solid var(--background-input-border-color);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+	0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 600px;
 	max-width: 100%;
   padding: 2rem 3rem 2rem 3rem;
   align-self: center;

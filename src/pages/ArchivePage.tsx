@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import NoteList from "../components/NoteList";
 import { useSearchParams } from "react-router-dom";
 import Note from "../interface/noteIface";
 import SearchBar from "../components/SearchBar";
 import { getArchivedNotes,deleteNote } from "../utils/api";
+import LocaleContext from "../contexts/LocaleContext";
 
 
 const ArchivePage: React.FC = () => {
+  const { localeContext } = useContext(LocaleContext);
   const [searchParams, setSearchParams] = useSearchParams();
     const [notes, setNotes] = React.useState<Note[]>([]);
     const [keyword, setKeyword] = React.useState<string>(
@@ -40,14 +42,14 @@ const ArchivePage: React.FC = () => {
 
     return (
       <div className="note-app__body">
-        <h2>Cari Catatan</h2>
+        <h2>{localeContext === 'id' ? 'Cari Catatan' : 'Search Note'}</h2>
         <SearchBar
           keyword={keyword}
           keywordChange={onKeywordChangeHandler}
         />
-        <h2>Daftar Catatan</h2>
+        <h2>{localeContext === 'id' ? 'Daftar Catatan' : 'List Note'}</h2>
         {filteredNotes.length === 0 ? (
-          <p className="notes-list__empty-message">Tidak Ada Catatan</p>
+          <p className="notes-list__empty-message">{localeContext === 'id' ? 'Tidak Ada Catatan' : 'Notes Not Found!'}</p>
         ) : (
           <NoteList notes={filteredNotes} onDelete={onDeleteHandler} />
         )}

@@ -1,10 +1,13 @@
 import React from "react";
 import NoteApp from "./components/NoteApp";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LocaleProvider } from "./contexts/LocaleContext";
 
 interface AppState {
   theme: string;
+  localeContext: string;
   toggleTheme: () => void;
+  toggleLocale: () => void;
 }
 
 class App extends React.Component<{}, AppState> {
@@ -12,6 +15,7 @@ class App extends React.Component<{}, AppState> {
     super(props);
     this.state = {
       theme: 'light',
+      localeContext: localStorage.getItem("locale") ?? "id",
       toggleTheme: () => {
         this.setState((prevState) => {
           const newTheme = prevState.theme === 'light' ? 'dark' : 'light';
@@ -20,12 +24,21 @@ class App extends React.Component<{}, AppState> {
             theme: newTheme
           };
         });
+      },
+      toggleLocale: () => {
+        this.setState((prevState) => {
+          const newLocale = prevState.localeContext === 'id' ? 'en' : 'id';
+          localStorage.setItem('locale',newLocale);
+          return{
+            localeContext: newLocale
+          }
+        })
       }
     };
   }
 
   componentDidMount(): void {
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') ?? 'light';
     this.setState({ theme: savedTheme }, () => {
       document.documentElement.setAttribute('data-theme', savedTheme);
     });
@@ -39,11 +52,13 @@ class App extends React.Component<{}, AppState> {
 
   render() {
     return (
-      <ThemeProvider value={this.state}>
-        <div>
-          <NoteApp />
-        </div>
-      </ThemeProvider>
+      <LocaleProvider value={this.state}>
+        <ThemeProvider value={this.state}>
+          <div>
+            <NoteApp />
+          </div>
+        </ThemeProvider>
+      </LocaleProvider>
     );
   }
 }

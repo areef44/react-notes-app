@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import AddPage from "../pages/AddPage";
 import DetailPage from "../pages/DetailPage";
@@ -9,6 +9,7 @@ import NoteLayout from "./NoteLayout";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import { getUserLogged, putAccessToken, User } from "../utils/api";
+import NoteLayoutPublic from "./NoteLayoutPublic";
 
 // Tipe data pengguna yang terautentikasi
 interface LoginSuccessProps {
@@ -62,8 +63,11 @@ const NoteApp: React.FC = () => {
           {authedUser === null ? (
             // Rute untuk pengguna yang belum login
             <Routes>
-              <Route path="/*" element={<LoginPage loginSuccess={loginSuccess} />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/" element={<NoteLayoutPublic />}>
+                <Route index element={<LoginPage loginSuccess={loginSuccess} />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Route>
             </Routes>
           ) : (
             // Rute untuk pengguna yang sudah login
