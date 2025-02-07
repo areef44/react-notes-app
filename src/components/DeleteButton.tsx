@@ -3,8 +3,8 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import PropTypes from "prop-types";
 
 interface DeleteButtonProps {
-  id: number;
-  onDelete: (id: number) => void;
+  id: string;
+  onDelete: (id: string) => void;
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onDelete }) => {
@@ -20,7 +20,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onDelete }) => {
 };
 
 DeleteButton.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 

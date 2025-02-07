@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import LocaleContext from "../contexts/LocaleContext";
 interface SearchBarProps {
   keywordChange: (keyword: string) => void;
   keyword: string;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ keyword, keywordChange }) => {
+  const { localeContext } = useContext(LocaleContext); 
   return (
     <div>
       <input
         className="input-search"
         type="text"
-        placeholder="Cari Catatan..."
+        placeholder={localeContext === 'id' ? 'Cari Catatan..' : 'Search Note..'}
         value={keyword}
         onChange={(event) => keywordChange(event.target.value)}
       />

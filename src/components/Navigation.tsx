@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import LocaleContext from "../contexts/LocaleContext";
 
 const Navigation: React.FC = () => {
+  const { localeContext } = useContext(LocaleContext);
   return (
     <nav className="navigation">
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">{localeContext === "id" ? "Beranda" : "Home"}</Link>
         </li>
         <li>
-          <Link to="/archive">Arsip</Link>
+          <Link to="/archive">{localeContext === "id" ? "Arsip" : "Archive"}</Link>
         </li>
         <li>
-          <Link to="/add">Tambah Note</Link>
+          <Link to="/add">{localeContext === "id" ? "Tambah Catatan" : "Add Note"}</Link>
         </li>
       </ul>
     </nav>

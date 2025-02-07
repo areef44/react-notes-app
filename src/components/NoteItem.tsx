@@ -9,7 +9,7 @@ interface NoteItemProps {
 
 const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
   return (
-    <div className="note-item">
+    <div className="note-item" >
       <NoteItemContent
         id={note.id}
         title={note.title}
@@ -22,8 +22,8 @@ const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
 };
 
 NoteItem.propTypes = {
-  note: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,

@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 
 interface NotesListProps {
   notes: Note[];
-  onDelete: (id: number) => void;
-  onArchive?: (id: number) => void;
+  onDelete: (id: string) => void;
+  onArchive?: (id: string) => void;
   onUnarchive?: (id: number) => void;
 }
 
@@ -36,7 +36,7 @@ const NoteList: React.FC<NotesListProps> = ({
 NoteList.propTypes = {
   notes: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,

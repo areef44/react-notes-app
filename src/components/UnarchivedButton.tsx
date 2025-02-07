@@ -3,8 +3,8 @@ import { FaRegCircleUp } from "react-icons/fa6";
 import PropTypes from "prop-types";
 
 interface UnarchiveButtonProps {
-  id: number;
-  onUnarchive: (id: number) => void;
+  id: string;
+  onUnarchive: (id: string) => void;
 }
 
 const UnarchiveButton: React.FC<UnarchiveButtonProps> = ({
@@ -22,7 +22,7 @@ const UnarchiveButton: React.FC<UnarchiveButtonProps> = ({
 };
 
 UnarchiveButton.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onUnarchive: PropTypes.func.isRequired,
 };
 

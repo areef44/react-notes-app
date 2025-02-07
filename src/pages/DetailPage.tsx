@@ -1,47 +1,56 @@
 import React from "react";
 import NoteDetail from "../components/NoteDetail";
-import { getNote } from "../utils";
+import { getNote } from "../utils/api";
 import { useParams } from "react-router-dom";
 import Note from "../interface/noteIface";
-import PropTypes from "prop-types";
 
-// State untuk DetailPage
-interface DetailPageState {
-  notes: Note | null;
-}
+const DetailPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [note, setNote] = React.useState<Note | null>(null);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<string | null>(null);
 
-interface DetailPageProps {
-  id: number;
-}
-
-const DetailPageWrapper: React.FC = () => {
-  const { id } = useParams();
-
-  return <DetailPage id={Number(id)} />;
-};
-
-class DetailPage extends React.Component<DetailPageProps, DetailPageState> {
-  // add props type
-  static propTypes = {
-    id: PropTypes.number.isRequired,
-  };
-  constructor(props: DetailPageProps) {
-    super(props);
-
-    this.state = {
-      notes: getNote(props.id),
-    };
-  }
-
-  render() {
-    const { notes } = this.state;
-
-    if (!notes) {
-      return <p>Note not found!</p>;
+  React.useEffect(() => {
+    if (!id) {
+      setError("Invalid Note ID");
+      setIsLoading(false);
+      return;
     }
 
-    return <NoteDetail {...notes} />;
-  }
-}
+    const getDetailNote = async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await getNote(id);
+        if (data) {
+          setNote(data);
+        } else {
+          setError("Note not found.");
+        }
+      } catch (error) {
+        setError(
+          error instanceof Error ? error.message : "Failed to fetch note details."
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-export default DetailPageWrapper;
+    getDetailNote();
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
+  return note ? <NoteDetail {...note} /> : <div>Note not available</div>;
+};
+
+export default DetailPage;

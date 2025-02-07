@@ -1,15 +1,18 @@
 import React from "react";
-import { addNote } from "../utils";
+import { addNote } from "../utils/api";
 import NoteInput from "../components/NoteInput";
-import Note from "../interface/noteIface";
 import { useNavigate } from "react-router-dom";
 
 const AddPage: React.FC = () => {
   const navigate = useNavigate();
   // Menambahkan tipe untuk note
-  function onAddNoteHandler(note: Note): void {
-    addNote(note);
-    navigate("/");
+  async function onAddNoteHandler(note: {title: string; body: string;}) {
+    try {
+      await addNote(note);
+      navigate("/");
+    } catch (error) {
+      console.error("Gagal menambahkan catatan:", error);
+    }
   }
 
   return (
